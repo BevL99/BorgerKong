@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class OrderItem {
 
 
-    private String orderItemID;
+    private int orderItemID;
     private String orderItemName;
     private double orderItemPrice;
     private int orderItemImage;
@@ -15,7 +15,7 @@ public class OrderItem {
 
     }
 
-    public OrderItem(String orderItemID, String orderItemName, double orderItemPrice, int orderItemImage, int orderQuantity){
+    public OrderItem(int orderItemID, String orderItemName, double orderItemPrice, int orderItemImage, int orderQuantity){
         this.orderItemID = orderItemID;
         this.orderItemName = orderItemName;
         this.orderItemPrice = orderItemPrice;
@@ -23,11 +23,11 @@ public class OrderItem {
         this.orderQuantity = orderQuantity;
         }
 
-    public String getOrderItemID() {
+    public int getOrderItemID() {
         return orderItemID;
     }
 
-    public void setOrderItemID(String orderItemID) {
+    public void setOrderItemID(int orderItemID) {
         this.orderItemID = orderItemID;
     }
 

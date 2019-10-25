@@ -10,6 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import static com.example.borgerkong.MainActivity.orderList;
+import static com.example.borgerkong.MainActivity.orders;
+
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -23,14 +28,16 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView quantityAdd;
     private Button addOrder;
 
+    private int oIID;
+    private String oIName;
+    private double oIPrice;
+    private int oIImage;
     private int quantity;
-    private String sq;
-    private String iName;
-    private double iPrice;
-    private int iImage;
 
     private Item item;
     private String status;
+
+    private OrderItem oi;
 
     private Double total = 0.00;
 
@@ -57,14 +64,14 @@ public class DetailActivity extends AppCompatActivity {
         quantityMinus = findViewById(R.id.lessItem);
         addOrder = findViewById(R.id.addToOrder);
 
-        // Set the views to show the data of our object
-        iName = item.getItemName();
-        iPrice = item.getItemPrice();
-        iImage = item.getDrawableID();
+        oIID = item.getItemID();
+        oIName = item.getItemName();
+        oIPrice = item.getItemPrice();
+        oIImage = item.getDrawableID();
 
-        nameTV.setText(iName);
+        nameTV.setText(oIName);
         descTV.setText(item.getItemDesc());
-        priceTV.setText("$" + String.format("%.2f",iPrice));
+        priceTV.setText("$" + String.format("%.2f",oIPrice));
 
 
 
@@ -80,7 +87,9 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 quantity = Integer.parseInt(itemQuantity.getText().toString());
-                quantity = quantity - 1;
+                if(quantity>0){
+                    quantity = quantity-1;
+                }
                 itemQuantity.setText(Integer.toString(quantity));
             }
         });
@@ -88,22 +97,26 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 quantity = Integer.parseInt(itemQuantity.getText().toString());
-                total = total + iPrice*quantity;
+                total = total + oIPrice*quantity;
 
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        "Order Updated: Added "+Math.abs(quantity)+" x "+iName+"\n"+"\n"+"Price Updated: $"+ String.format("%.2f",total),
+                        "Order Updated: Added "+quantity+" x "+oIName+"\n"+"\n"+"Total Cost: $"+String.format("%.2f",total),
                         Toast.LENGTH_SHORT);
                 toast.show();
 
+                oi = new OrderItem(oIID,oIName,oIPrice,oIImage,quantity);
+
+                orders.add(oi);
+                orderList.orders = orders;
+                orderList.total = orderList.total + total;
+
                 total = 0.0;
-
-
 
             }
         });
 
 
-        itemIV.setImageResource(iImage);
+        itemIV.setImageResource(oIImage);
     }
 
 

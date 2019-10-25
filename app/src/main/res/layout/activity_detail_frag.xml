@@ -77,26 +77,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="144dp"
             android:layout_marginLeft="144dp"
+            android:layout_marginBottom="24dp"
             android:text="@string/add_to_order"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dQuantity" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/lessItem"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/addToOrder"
             app:layout_constraintEnd_toStartOf="@+id/dQuantity"
-            app:layout_constraintTop_toBottomOf="@+id/dDesc"
             app:srcCompat="@drawable/remove" />
 
         <ImageView
             android:id="@+id/addItem"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/addToOrder"
             app:layout_constraintStart_toEndOf="@+id/dQuantity"
-            app:layout_constraintTop_toBottomOf="@+id/dDesc"
             app:srcCompat="@drawable/add" />
 
         <EditText
@@ -105,13 +104,14 @@
             android:layout_height="44dp"
             android:layout_marginStart="172dp"
             android:layout_marginLeft="172dp"
-            android:layout_marginTop="8dp"
-            android:cursorVisible="false"
+            android:layout_marginTop="16dp"
+            android:cursorVisible="true"
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
             android:text="0"
             android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/addToOrder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dDesc" />
 

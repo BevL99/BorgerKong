@@ -45,7 +45,7 @@ import java.util.List;
                     "Double Cheeseburger",
                     "Two juicy meat paddies, with two slices of cheese, with fresh buns",
                     8.50,
-                    R.drawable.whopper));
+                    R.drawable.doublecheese));
             items.put(5, new Item(
                     5,
                     "Regular Fries",

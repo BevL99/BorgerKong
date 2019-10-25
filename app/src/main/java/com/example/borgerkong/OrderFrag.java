@@ -13,7 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+
+import static com.example.borgerkong.MainActivity.orderList;
+import static com.example.borgerkong.MainActivity.orders;
+import static java.lang.String.format;
 
 
 public class OrderFrag extends Fragment {
@@ -22,6 +30,7 @@ public class OrderFrag extends Fragment {
     TextView title;
     TextView total;
     Double amtTotal;
+    NumberFormat format = new DecimalFormat("#0.00");
 
     public OrderFrag() {
 
@@ -30,20 +39,24 @@ public class OrderFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order, container, false);
+        View view2 = inflater.inflate(R.layout.fragment_order, container, false);
 
-        recyclerView = view.findViewById(R.id.rv_order);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
-        recyclerView.setLayoutManager(layoutManager);
+        total = view2.findViewById(R.id.orderAmt);
+        amtTotal = orderList.total;
+
+        total.setText("$"+ format.format(amtTotal));
 
 
+        recyclerView = view2.findViewById(R.id.rv_order);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(view2.getContext());
+        recyclerView.setLayoutManager(layoutManager2);
 
+        OrderAdapter oAdapter = new OrderAdapter();
 
-//        OrderAdapter oAdapter = new OrderAdapter();
-//        oAdapter.setData(OrderDatabase.getAllItems());
-//
-//        recyclerView.setAdapter(oAdapter);
-        return view;
+        oAdapter.setData(orders);
+        recyclerView.setAdapter(oAdapter);
+
+        return view2;
     }
 
     @Override

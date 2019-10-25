@@ -18,6 +18,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView botNavView;
+    public static ArrayList<OrderItem> orders;
+    public static OrderList orderList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment fragment = new ItemsFrag();
         swapFragment(fragment);
+
+        orders = new ArrayList<OrderItem>();
+        orderList = new OrderList();
+
 
         botNavView = findViewById(R.id.bot_nav);
         botNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

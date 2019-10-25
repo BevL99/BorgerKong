@@ -13,24 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
-    private ArrayList<OrderItem> orderList;
-    private Context context;
+
+    private ArrayList<OrderItem> orderToPass;
 
 
-    public OrderAdapter(ArrayList<OrderItem> orderList, Context context){
-        this.orderList = orderList;
-        this.context = context;
-    }
-
-    public void setData(ArrayList<OrderItem> itemsToAdapt) {
-        this.orderList = itemsToAdapt;
+    public void setData(ArrayList<OrderItem> ordersToPass) {
+        this.orderToPass = ordersToPass;
     }
 
     @NonNull
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view =
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item, parent, false);
+                        .inflate(R.layout.order_item, parent, false);
 
         // Then create an instance of your custom ViewHolder with the View you got from inflating
         // the layout.
@@ -45,20 +40,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         // 'position' is the index of the ViewHolder currently being bound (note VIEWHOLDER). So
         // if position is 0, then we are binding the first ViewHolder in the list. This means the
         // corresponding data object will be at index 0 of our data ArrayList.
-        final OrderItem itemAtPosition = orderList.get(position);
-
+        final OrderItem itemAtPosition = orderToPass.get(position);
 
             holder.itemName.setText(itemAtPosition.getOrderItemName());
-            holder.itemPrice.setText("$" + String.format("%.2f", (itemAtPosition.getOrderItemPrice())*itemAtPosition.getOrderQuantity()));
-
-
+            holder.itemPrice.setText("$" + String.format("%.2f", (itemAtPosition.getOrderItemPrice())));
             holder.itemImageView.setImageResource(itemAtPosition.getOrderItemImage());
+            holder.itemQuantity.setText("Q: "+itemAtPosition.getOrderQuantity());
 
     }
 
     @Override
     public int getItemCount() {
-        return orderList.size();
+        return orderToPass.size();
     }
 
     // ViewHolder represents one item, but doesn't have data when it's first constructed.
@@ -69,7 +62,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         public TextView itemPrice;
         public ImageView itemImageView;
         public TextView itemQuantity;
-        public TextView oTitle;
+
 
         // This constructor is used in onCreateViewHolder
         public OrderViewHolder(View v) {
@@ -78,6 +71,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             itemName = v.findViewById(R.id.oItemName);
             itemPrice = v.findViewById(R.id.oItemPrice);
             itemImageView = v.findViewById(R.id.oItemPhoto);
+            itemQuantity = v.findViewById(R.id.oQuantity);
         }
     }
 }
